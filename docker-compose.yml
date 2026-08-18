@@ -1,0 +1,22 @@
+services:
+  narkins-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      - SPLENDID_API_KEY=${SPLENDID_API_KEY}
+      - SPLENDID_API_SECRET=${SPLENDID_API_SECRET}
+      - SPLENDID_APP_ID=${SPLENDID_APP_ID}
+    restart: unless-stopped
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    environment:
+      - AUTH_USERNAME=${AUTH_USERNAME}
+      - AUTH_PASSWORD=${AUTH_PASSWORD}
+    depends_on:
+      - narkins-backend
+    expose:
+      - "80"
+    restart: unless-stopped
