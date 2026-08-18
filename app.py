@@ -31,23 +31,20 @@ HEADERS = {
     "Content-Type": "application/json-patch+json"
 }
 
-# Define API URLs for Different Reports
+# Define API URLs and Payloads for Different Reports
+#
+# IMPORTANT: The Splendid Accounts API requires an explicit branchIds list -
+# it does NOT return all branches when this is left out. So this list is an
+# INCLUDE list, not an exclude list: when a new physical branch is added on
+# the Splendid Accounts side, add its ID here to make it appear on the
+# dashboard. There is no way around this without an "all branches" endpoint
+# from Splendid Accounts, which does not appear to exist.
 REPORTS = {
     "ProductDateWiseSale": {
         "url": "https://narkins.splendidaccounts.com/api/narkins-textile-industries/2125/Reports/ProductDateWiseSaleReport",
+        "branchIds": [2248, 2249, 5574, 5701, 7965, 13468, 13469, 21578, 24709, 24710, 24711, 25762, 2994, 23405, 12721, 25762, 26777, 26778, 26779, 26780, 26781]
     }
 }
-
-# Branches to EXCLUDE from every report. New branches added on the Splendid
-# Accounts side will show up automatically without any code change - just
-# add a branch's ID (or name) here if you ever want to hide it.
-EXCLUDED_BRANCH_IDS = [
-    # e.g. 2994,
-    24166
-]
-EXCLUDED_BRANCH_NAMES = [
-    # e.g. "Some Branch Name",
-]
 
 # Cache configuration
 data_cache = {}
@@ -73,9 +70,7 @@ def fetch_api_data(report_type):
     payload = {
         "fromDate": first_day.strftime("%Y-%m-%d"),
         "endDate": current_date.strftime("%Y-%m-%d"),
-        # No branchIds filter here on purpose - we ask the API for every
-        # branch, then remove excluded ones below. This is what makes new
-        # branches show up automatically.
+        "branchIds": report_config["branchIds"],
         "ascending": True,
         "orderBy": "Date"
     }
@@ -94,23 +89,15 @@ def fetch_api_data(report_type):
                 data = response.json()
                 
                 if isinstance(data, list) and len(data) > 0:
-                    print(f"✅ Success! Fetched {len(data)} records before exclusions")
+                    print(f"✅ Success! Fetched {len(data)} records")
                     
-                    # Process data, skipping any excluded branch
+                    # Process data
                     processed_data = []
-                    skipped = 0
                     for item in data:
-                        branch_id = item.get("branchId")
-                        branch_name = item.get("branchName", "")
-
-                        if branch_id in EXCLUDED_BRANCH_IDS or branch_name in EXCLUDED_BRANCH_NAMES:
-                            skipped += 1
-                            continue
-
                         processed_data.append({
                             "Date": item.get("date", ""),
                             "Month": item.get("monthName", ""),
-                            "Branch": branch_name,
+                            "Branch": item.get("branchName", ""),
                             "Code": item.get("productCode", ""),
                             "Product Name": item.get("productName", ""),
                             "Category": item.get("productCategoryName", ""),
@@ -118,8 +105,6 @@ def fetch_api_data(report_type):
                             "Type": item.get("symbol", ""),
                             "Total Sales": item.get("includingTaxAmount", 0)
                         })
-
-                    print(f"✅ {len(processed_data)} records kept, {skipped} excluded")
 
                     return processed_data
                 else:
