@@ -43,6 +43,7 @@ REPORTS = {
 # add a branch's ID (or name) here if you ever want to hide it.
 EXCLUDED_BRANCH_IDS = [
     # e.g. 2994,
+    24166
 ]
 EXCLUDED_BRANCH_NAMES = [
     # e.g. "Some Branch Name",
