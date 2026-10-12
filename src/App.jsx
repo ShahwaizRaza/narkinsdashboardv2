@@ -225,7 +225,7 @@ function App() {
         {/* Mens Stitched */}
         <div className="mb-6">
           <DataTable
-            title="Top 10 Winter"
+            title="Top 10 Mens Stitched"
             data={mensstitchedProducts}
             columns={[
               { header: 'Main Product', accessor: (row) => row.product },
