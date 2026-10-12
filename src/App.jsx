@@ -64,7 +64,7 @@ function App() {
   const cottonProducts = getProductsByCategory(data, 'COTTON', 10);
   const blendedProducts = getProductsByCategory(data, 'BLENDED', 10);
   const winterProducts = getProductsByCategory(data, 'WINTER', 10);
-  const mensstitchedProducts = getProductsByCategory(data, 'STITCHED', 10);
+  const mensstitchedProducts = getProductsByCategory(data, 'STITCHED', 10, true);
 
   return (
     <div className="min-h-screen bg-gray-50">

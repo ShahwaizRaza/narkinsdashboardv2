@@ -161,10 +161,11 @@ export const formatNumber = (value) => {
 };
 
 // Alternative: Get products by category keyword
-export const getProductsByCategory = (data, keyword, limit = 10) => {
+export const getProductsByCategory = (data, keyword, limit = 10, exact = false) => {
+  const target = keyword.trim().toLowerCase();
   const filteredData = data.filter(item => {
-    const category = (item.Category || '').toLowerCase();
-    return category.includes(keyword.toLowerCase());
+    const category = (item.Category || '').trim().toLowerCase();
+    return exact ? category === target : category.includes(target);
   });
   
   const productMap = {};
