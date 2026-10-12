@@ -209,8 +209,8 @@ function App() {
           />
         </div>
 
-        {/* Winter Products */}
-        <div className="mb-6">
+        {/* Products by Category - Winter & Mens Stitched */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <DataTable
             title="Top 10 Winter"
             data={winterProducts}
@@ -221,9 +221,7 @@ function App() {
             ]}
             maxHeight="500px"
           />
-        </div>
-        {/* Mens Stitched */}
-        <div className="mb-6">
+          
           <DataTable
             title="Top 10 Mens Stitched"
             data={mensstitchedProducts}
