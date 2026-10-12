@@ -64,6 +64,7 @@ function App() {
   const cottonProducts = getProductsByCategory(data, 'COTTON', 10);
   const blendedProducts = getProductsByCategory(data, 'BLENDED', 10);
   const winterProducts = getProductsByCategory(data, 'WINTER', 10);
+  const mensstitchedProducts = getProductsByCategory(data, 'STITCHED', 10);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -221,13 +222,26 @@ function App() {
             maxHeight="500px"
           />
         </div>
+        {/* Mens Stitched */}
+        <div className="mb-6">
+          <DataTable
+            title="Top 10 Winter"
+            data={mensstitchedProducts}
+            columns={[
+              { header: 'Main Product', accessor: (row) => row.product },
+              { header: 'SOLD QTY', accessor: (row) => row.soldQty, isNumber: true },
+              { header: 'Total Sales', accessor: (row) => row.totalSales, isCurrency: true }
+            ]}
+            maxHeight="500px"
+          />
+        </div>
       </main>
 
       {/* Footer */}
       <footer className="bg-white shadow-inner mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-gray-500 text-sm">
-            © 2026 Narkins / Narmin Sales Dashboard • Auto-refreshes every 60 seconds
+            © 2026 Narkins | Narmin Sales Dashboard • Created by Shahwaiz Raza Future Category Manager
           </p>
         </div>
       </footer>
