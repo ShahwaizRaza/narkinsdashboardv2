@@ -42,7 +42,7 @@ HEADERS = {
 REPORTS = {
     "ProductDateWiseSale": {
         "url": "https://narkins.splendidaccounts.com/api/narkins-textile-industries/2125/Reports/ProductDateWiseSaleReport",
-        "branchIds": [2248, 2249, 5574, 5701, 7965, 13468, 13469, 21578, 24709, 24710, 24711, 25762, 2994, 23405, 12721, 25762, 26777, 26778, 26779, 26780, 26781, 26796]
+        "branchIds": [2248, 2249, 5574, 5701, 7965, 13468, 13469, 21578, 24709, 24710, 24711, 25762, 2994, 23405, 12721, 25762, 26777, 26778, 26779, 26780, 26781, 26796, 26799]
     }
 }
 
