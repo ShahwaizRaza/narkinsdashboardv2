@@ -239,7 +239,7 @@ function App() {
       <footer className="bg-white shadow-inner mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-gray-500 text-sm">
-            © 2026 Narkins | Narmin Sales Dashboard • Created by Shahwaiz Raza Future Category Manager
+            © 2026 Narkins | Narmin Sales Dashboard • Created by Shahwaiz Raza - Category Lead Narmin
           </p>
         </div>
       </footer>
